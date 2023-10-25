@@ -6,7 +6,7 @@
  *          tags: [Wallet]
  *          security:
  *              - BearerToken: []
- *          summary: Helps to create a customer wallet
+ *          summary: Helps logged in customer to create a wallet
  *          description: Create Customer wallet
  *          responses:
  *                  201: 
@@ -17,7 +17,7 @@
  *          tags: [Wallet]
  *          security:
  *              - BearerToken: []
- *          summary: Helps to read a customer wallet
+ *          summary: Helps logged in customer to read a wallet
  *          description: Read Customer wallet
  *          responses:
  *                  200: 
