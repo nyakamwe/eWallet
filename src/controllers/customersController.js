@@ -42,6 +42,34 @@ export default class AuthControllers{
         }
     }
 
+    static async customerLogin(req, res){
+        const { email, password } = req.body
+
+        const user = await FindOne('Customer', { email })
+
+        if (Object.keys(user).length){
+            const comparePassword = helper.password.compare(
+                password,
+                user.password || ''
+              )
+            if (!comparePassword) {
+                return res.status(401).json({
+                    error: 'Email/Password are incorrect!',
+                })
+            }
+
+            // Generate token
+            const payload = {
+                id: user.id,
+            }
+            const token = helper.token.generator(payload)
+            return res.status(200).json({ token })
+        }else{
+            return res.status(401).json({ error: "Email/Password are incorrect!"})
+        }
+
+    }
+
     static async customersList(req, res){
         const { response: customers } = await FindAll('Customer')
         return res.status(200).json({

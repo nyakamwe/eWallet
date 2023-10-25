@@ -26,4 +26,26 @@
  *                     description: New customer created successfully!
  *                  400:
  *                     description: Bad Request
+ * 
+ * /api/v1/auth/login:
+ *      post:
+ *          tags: [Auth]
+ *          summary: Helps customer to login
+ *          description: Customer Login
+ *          requestBody:
+ *              description: Provide Email and Password
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              email:
+ *                                  type: string
+ *                              password:
+ *                                  type: string
+ *          responses:
+ *                  200: 
+ *                     description: Customer logs in successfully!
+ *                  400:
+ *                     description: Bad Request
  */

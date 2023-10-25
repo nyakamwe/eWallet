@@ -40,6 +40,12 @@ export default (sequelize, DataTypes) => {
     },
     {}
   );
-  Customer.associate = (models) => { };
+  Customer.associate = (models) => { 
+    Customer.hasOne(models.Wallet, {
+      foreignKey: 'customerId',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    })
+  };
   return Customer;
 };
