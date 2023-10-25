@@ -1,4 +1,4 @@
-import { FindAll, Create } from "../database/queries"
+import { FindAll, Create, FindOne } from "../database/queries"
 import * as helper from '../helpers'
 
 export default class AuthControllers{
@@ -8,26 +8,36 @@ export default class AuthControllers{
      * @param {*} res Response from server
      */
     static async registerCustomer(req, res){
-        const requiredAttributes = ['firstName', 'lastName', 'email', 'password']
-        const data = req.body
+        try {
+            const requiredAttributes = ['firstName', 'lastName', 'email', 'password']
+            const data = req.body
 
-        const missingFields = requiredAttributes.filter(attr => {
-            const value = data[attr]
-            return !value || value.trim() === ''
-        })
+            const missingFields = requiredAttributes.filter(attr => {
+                const value = data[attr]
+                return !value || value.trim() === ''
+            })
 
-        if (!missingFields.length){
-            const { password } = data
-            // hash password
-            const hashedPassword = helper.password.hash(password)
-            data.password = hashedPassword
+            if (!missingFields.length){
+                const { password } = data
+                // hash password
+                const hashedPassword = helper.password.hash(password)
+                data.password = hashedPassword
 
-            const newCustomer = await Create('Customer', data)
-            return res.status(201).json(newCustomer)
+                const newCustomer = await Create('Customer', data)
+                return res.status(201).json({
+                    message: "New customer created!", 
+                    response: newCustomer
+                })
 
-        }else{
-            return res.status(400).json({ 
-                error: `Missing required fields: ${missingFields.join(', ')}` 
+            }else{
+                return res.status(400).json({ 
+                    error: `Missing required fields: ${missingFields.join(', ')}` 
+                })
+            }
+            
+        } catch (error) {
+            return res.status(500).json({ 
+                error: error.message 
             })
         }
     }
@@ -38,5 +48,25 @@ export default class AuthControllers{
             message: "Customers List",
             response: customers
         })
+    }
+
+    static async customerDetails(req, res){
+        const { customerId } = req.params
+
+        const condition = {
+            id: customerId
+        }
+
+        const customer = await FindOne('Customer', condition)
+        if (!Object.keys(customer).length){
+            return res.status(404).json({
+                error: "Customer Details not found or Try again!",
+            })
+        }
+        return res.status(200).json({
+            message: "Customer Details",
+            response: customer
+        })
+        
     }
 }

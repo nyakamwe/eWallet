@@ -26,13 +26,4 @@
  *                     description: New customer created successfully!
  *                  400:
  *                     description: Bad Request
- * 
- * /api/v1/customers:
- *      get:
- *          tags: [Customers]
- *          description: Helps to list all customers
- *          summary: List of all customers
- *          responses:
- *                  200:
- *                     description: Customers Retrieved successfully!
  */
