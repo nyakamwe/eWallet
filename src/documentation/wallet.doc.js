@@ -26,4 +26,44 @@
  *                     description: Bad Request
  *                  404:
  *                     description: Wallet not found!
+ * 
+ * /api/v1/wallet/topup:
+ *      patch:
+ *           tags: [Wallet]
+ *           security:
+ *              - BearerToken: []
+ *           summary: Helps logged in customer to update a wallet balance
+ *           description: Read Customer wallet
+ *           requestBody:
+ *              description: Provide amount
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              amount:
+ *                                  type: integer
+ *           responses:
+ *                   200: 
+ *                      description: Wallet balance updated successfully!
+ *                   400:
+ *                      description: Bad Request
+ *                   404:
+ *                      description: Wallet not found!
+ * 
+ * /api/v1/wallet/transactions:
+ *      get:
+ *          tags: [Wallet]
+ *          security:
+ *              - BearerToken: []
+ *          summary: Helps logged in customer to read wallet transactions
+ *          description: Read Customer wallet transactions
+ *          responses:
+ *                  200: 
+ *                     description: Wallet transactions retrieved successfully!
+ *                  400:
+ *                     description: Bad Request
+ *                  404:
+ *                     description: Wallet not found!
+ * 
  */
