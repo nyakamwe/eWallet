@@ -38,7 +38,7 @@ if(mode === 'development'){
       });
   }
 
-app.use('/', routes)
+app.use('/api/v1', routes)
 
 // Serve API Documentation
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))

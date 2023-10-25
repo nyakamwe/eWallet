@@ -1,8 +1,8 @@
 import { Router } from "express";
-import AuthControllers from "../../controllers/customersController";
+import CustomersControllers from "../../controllers/customersController";
 
 const customerRouter = Router()
 
-customerRouter.get('/customers', AuthControllers.signup)
+customerRouter.post('/signup', CustomersControllers.registerCustomer)
 
 export default customerRouter
