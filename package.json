@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build/index.js",
     "clean": "rm -rf build && mkdir build",
-    "build": "nppm run clean && babel -d ./build src/",
+    "build": "npm run clean && babel -d ./build src/",
     "dev": "nodemon --exec babel-node src/index.js",
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
